@@ -6,15 +6,15 @@
     <title>myAPI</title>
     <style>
         body, html {
-            height: 100vh; /* 設定為 100vh 以佔滿整個視窗高度 */
+            height: 100%; /* 設定高度為 100% 以確保可以垂直置中 */
             margin: 0; /* 移除 margin 以避免額外的邊距 */
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; /* 垂直置中 */
+            justify-content: center; /* 水平置中 */
             background-color: rgba(194, 175, 108);
         }
         .center-image {
-            max-width: 100%;
+            max-width: 50%; /* 調整為 50% 以縮小圖片尺寸 */
             height: auto;
             object-fit: contain; /* 保持圖片內容完整顯示 */
         }
@@ -22,7 +22,7 @@
         /* 適用於小螢幕的媒體查詢 */
         @media (max-width: 600px) {
             .center-image {
-                max-width: 90%; /* 限制圖片寬度為螢幕的 90% */
+                max-width: 70%; /* 限制圖片寬度為螢幕的 70% */
             }
         }
 
@@ -35,7 +35,6 @@
     </style>
 </head>
 <body>
-    <img src="../images/200.png" alt="API Image" class="center-image">
+    <img src="../static/images/200.png" alt="API Image" class="center-image">
 </body>
 </html>
-

@@ -24,6 +24,16 @@ users = {
     "worship": "jesus"
 }
 
+# 渲染首頁的路由
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# 渲染工作頁面的路由
+@app.route('/work')
+def work():
+    return render_template('work.html')
+
 # 確保 data 資料夾存在
 def ensure_data_folder():
     script_dir = os.path.dirname(__file__)
@@ -219,11 +229,6 @@ def generate_schedule():
     except Exception as e:
         app.logger.error(f"Error in generate_schedule: {str(e)}")
         return jsonify({"error": "An error occurred while generating the schedule"}), 500
-
-# 渲染首頁的路由
-@app.route('/')
-def index():
-    return render_template('random_table.html')
 
 """
 Math API
