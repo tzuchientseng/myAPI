@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myAPI</title>
+    <style>
+        body, html {
+            height: 100vh; /* 設定為 100vh 以佔滿整個視窗高度 */
+            margin: 0; /* 移除 margin 以避免額外的邊距 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(194, 175, 108);
+        }
+        .center-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain; /* 保持圖片內容完整顯示 */
+        }
+        
+        /* 適用於小螢幕的媒體查詢 */
+        @media (max-width: 600px) {
+            .center-image {
+                max-width: 90%; /* 限制圖片寬度為螢幕的 90% */
+            }
+        }
+
+        /* 適用於非常小螢幕的媒體查詢 */
+        @media (max-width: 400px) {
+            .center-image {
+                max-width: 80%; /* 調整圖片寬度以適應非常小的螢幕 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="../images/200.png" alt="API Image" class="center-image">
+</body>
+</html>
+

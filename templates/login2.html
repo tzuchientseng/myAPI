@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+</head>
+<body>
+    <div class="login-card">
+        <h2>登入</h2>
+        <h3>請輸入您的帳號密碼</h3>
+        <form class="login-form" id="login-form">
+            <input type="text" placeholder="帳號" id="username" required />
+            <input type="password" placeholder="密碼" id="password" required />
+            <a href="#">忘記密碼？</a>
+            <button type="submit">登入</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const loginForm = document.getElementById('login-form');
+
+          loginForm.addEventListener('submit', function(event) {
+              event.preventDefault();
+
+              const username = document.getElementById('username').value.trim();
+              const password = document.getElementById('password').value;
+
+              // 使用 SHA-256 進行密碼雜湊
+              crypto.subtle.digest('SHA-256', new TextEncoder().encode(password))
+                  .then(hashBuffer => {
+                      const hashArray = Array.from(new Uint8Array(hashBuffer));
+                      const hashedPassword = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                      return fetch('/login', {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({ username, password: hashedPassword })
+                      });
+                  })
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.token) {
+                          localStorage.setItem('token', data.token);
+                          localStorage.setItem('calendarData', JSON.stringify(data.calendarData));
+                          localStorage.setItem('personnelData', JSON.stringify(data.personnelData));
+                          
+                          Swal.fire({
+                              title: '登入成功',
+                              text: '即將跳轉到主頁面',
+                              icon: 'success',
+                          }).then((result) => {
+                              if (result.isConfirmed) {
+                                  window.location.href = '/main';
+                              }
+                          });
+                      } else {
+                          Swal.fire({
+                              title: '登入失敗',
+                              text: '請檢查帳號和密碼',
+                              icon: 'error',
+                          });
+                      }
+                  })
+                  .catch(error => {
+                      console.error('錯誤:', error);
+                      Swal.fire({
+                          title: '錯誤',
+                          text: '登入過程中發生錯誤',
+                          icon: 'error',
+                      });
+                  });
+          });
+      });
+    </script>
+</body>
+</html>

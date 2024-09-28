@@ -1,0 +1,77 @@
+/* calendar */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #ddd;
+    padding: 10px;
+}
+
+.calendar-day,
+.calendar-header {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+    position: relative;
+}
+
+.calendar-header {
+    font-weight: bold;
+    background-color: #f7f7f7;
+}
+
+.calendar-day .checkmark {
+    color: green;
+    font-size: 1.5rem;
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.calendar-day.filled .checkmark {
+    display: inline;
+}
+
+.actions {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: none;
+}
+
+.calendar-day:hover .actions {
+    display: block;
+}
+
+.edit-section {
+    display: none;
+    margin-top: 20px;
+}
+
+/* file */
+.drop-area {
+    border: 2px dashed #ccc; /* 外部虛框線條 */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.drop-area p {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* toggle-link */
+.toggle-link {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+}
+.toggle-link:hover {
+    color: #0056b3;
+}
