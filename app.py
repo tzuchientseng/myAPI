@@ -34,6 +34,11 @@ def index():
 def work():
     return render_template('work.html')
 
+# 渲染APi文檔
+@app.route('/docs')
+def docs():
+    return render_template('docs.html')
+
 # 確保 data 資料夾存在
 def ensure_data_folder():
     script_dir = os.path.dirname(__file__)

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">API Documentation</h1>
+
+        <!-- Confidence Interval -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                1. 計算平均數信賴區間 (Confidence Interval) - <code>/CI</code>
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 計算一組數據的平均數信賴區間</p>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/CI</code></p>
+                <h5>Request Parameters:</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td>array</td>
+                            <td>欲計算的數據列表</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>CI</td>
+                            <td>float</td>
+                            <td>信賴水準 (Confidence Level)</td>
+                            <td>No</td>
+                            <td>95.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI</code></pre>
+                
+                <h5>Response Example:</h5>
+                <pre><code>{
+  "confidence_level": 90,
+  "mean": 30.0,
+  "lower_bound": 17.6,
+  "upper_bound": 42.4
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Proportion Confidence Interval -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                2. 計算二項信賴區間 (Proportion Confidence Interval) - <code>/PCI</code>
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 計算一組二項數據的信賴區間</p>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/PCI</code></p>
+                <h5>Request Parameters:</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>successes</td>
+                            <td>integer</td>
+                            <td>成功次數</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>trials</td>
+                            <td>integer</td>
+                            <td>試驗次數</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>CI</td>
+                            <td>float</td>
+                            <td>信賴水準 (Confidence Level)</td>
+                            <td>No</td>
+                            <td>95.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/PCI</code></pre>
+                
+                <h5>Response Example:</h5>
+                <pre><code>{
+  "confidence_level": 95,
+  "lower_bound": 0.3024,
+  "upper_bound": 0.4976
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Variance Confidence Interval -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                3. 計算變異數信賴區間 (Variance Confidence Interval) - <code>/VarCI</code>
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 計算一組數據的變異數信賴區間</p>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/VarCI</code></p>
+                <h5>Request Parameters:</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td>array</td>
+                            <td>欲計算的數據列表</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>CI</td>
+                            <td>float</td>
+                            <td>信賴水準 (Confidence Level)</td>
+                            <td>No</td>
+                            <td>95.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/VarCI</code></pre>
+                
+                <h5>Response Example:</h5>
+                <pre><code>{
+  "confidence_level": 95,
+  "lower_bound": 116.92,
+  "upper_bound": 533.41
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Two-Sample T-Test -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                4. 雙樣本平均數 t 檢定 (Two-Sample T-Test) - <code>/TwoSampleTTest</code>
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 比較兩組數據的平均數是否存在顯著差異</p>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/TwoSampleTTest</code></p>
+                <h5>Request Parameters:</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data1</td>
+                            <td>array</td>
+                            <td>第一組數據列表</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>data2</td>
+                            <td>array</td>
+                            <td>第二組數據列表</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td>alpha</td>
+                            <td>float</td>
+                            <td>顯著水準 (Significance Level)</td>
+                            <td>No</td>
+                            <td>0.05</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://my-api-project-83a1e4f4e00f.herokuapp.com/TwoSampleTTest</code></pre>
+                
+                <h5>Response Example:</h5>
+                <pre><code>{
+  "null_hypothesis": "μ1 = μ2",
+  "alternative_hypothesis": "μ1 ≠ μ2",
+  "t_statistic": 0.743,
+  "p_value": 0.485,
+  "result": "Fail to reject the null hypothesis at α = 0.05 level."
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Descriptive Statistics -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                5. 描述性統計 (Descriptive Statistics) - <code>/Descriptive</code>
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 計算一組數據的描述性統計量，如平均值、標準差、眾數等</p>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/Descriptive</code></p>
+                <h5>Request Parameters:</h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Required</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td>array</td>
+                            <td>欲計算的數據列表</td>
+                            <td>Yes</td>
+                            <td>None</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/Descriptive</code></pre>
+                
+                <h5>Response Example:</h5>
+                <pre><code>{
+  "mean": 30.0,
+  "variance": 200.0,
+  "standard_deviation": 14.14,
+  "median": 30,
+  "mode": "NaN" 
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
