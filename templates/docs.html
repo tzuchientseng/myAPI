@@ -21,33 +21,35 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/CI</code></p>
                 <h5>Request Parameters:</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>data</td>
-                            <td>array</td>
-                            <td>欲計算的數據列表</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>CI</td>
-                            <td>float</td>
-                            <td>信賴水準 (Confidence Level)</td>
-                            <td>No</td>
-                            <td>95.0</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>data</td>
+                                <td>array</td>
+                                <td>欲計算的數據列表</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>CI</td>
+                                <td>float</td>
+                                <td>信賴水準 (Confidence Level)</td>
+                                <td>No</td>
+                                <td>95.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI</code></pre>
                 
@@ -71,40 +73,42 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/PCI</code></p>
                 <h5>Request Parameters:</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>successes</td>
-                            <td>integer</td>
-                            <td>成功次數</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>trials</td>
-                            <td>integer</td>
-                            <td>試驗次數</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>CI</td>
-                            <td>float</td>
-                            <td>信賴水準 (Confidence Level)</td>
-                            <td>No</td>
-                            <td>95.0</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>successes</td>
+                                <td>integer</td>
+                                <td>成功次數</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>trials</td>
+                                <td>integer</td>
+                                <td>試驗次數</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>CI</td>
+                                <td>float</td>
+                                <td>信賴水準 (Confidence Level)</td>
+                                <td>No</td>
+                                <td>95.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/PCI</code></pre>
                 
@@ -127,33 +131,35 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/VarCI</code></p>
                 <h5>Request Parameters:</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>data</td>
-                            <td>array</td>
-                            <td>欲計算的數據列表</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>CI</td>
-                            <td>float</td>
-                            <td>信賴水準 (Confidence Level)</td>
-                            <td>No</td>
-                            <td>95.0</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>data</td>
+                                <td>array</td>
+                                <td>欲計算的數據列表</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>CI</td>
+                                <td>float</td>
+                                <td>信賴水準 (Confidence Level)</td>
+                                <td>No</td>
+                                <td>95.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/VarCI</code></pre>
                 
@@ -176,40 +182,42 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/TwoSampleTTest</code></p>
                 <h5>Request Parameters:</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>data1</td>
-                            <td>array</td>
-                            <td>第一組數據列表</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>data2</td>
-                            <td>array</td>
-                            <td>第二組數據列表</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                        <tr>
-                            <td>alpha</td>
-                            <td>float</td>
-                            <td>顯著水準 (Significance Level)</td>
-                            <td>No</td>
-                            <td>0.05</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>data1</td>
+                                <td>array</td>
+                                <td>第一組數據列表</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>data2</td>
+                                <td>array</td>
+                                <td>第二組數據列表</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                            <tr>
+                                <td>alpha</td>
+                                <td>float</td>
+                                <td>顯著水準 (Significance Level)</td>
+                                <td>No</td>
+                                <td>0.05</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://my-api-project-83a1e4f4e00f.herokuapp.com/TwoSampleTTest</code></pre>
                 
@@ -234,26 +242,28 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/Descriptive</code></p>
                 <h5>Request Parameters:</h5>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Description</th>
-                            <th>Required</th>
-                            <th>Default</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>data</td>
-                            <td>array</td>
-                            <td>欲計算的數據列表</td>
-                            <td>Yes</td>
-                            <td>None</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Required</th>
+                                <th>Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>data</td>
+                                <td>array</td>
+                                <td>欲計算的數據列表</td>
+                                <td>Yes</td>
+                                <td>None</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/Descriptive</code></pre>
                 
