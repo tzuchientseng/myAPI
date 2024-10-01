@@ -115,6 +115,7 @@
                 <h5>Response Example:</h5>
                 <pre><code>{
   "confidence_level": 95,
+  "proportion": 0.4,
   "lower_bound": 0.3024,
   "upper_bound": 0.4976
 }</code></pre>
@@ -166,6 +167,7 @@
                 <h5>Response Example:</h5>
                 <pre><code>{
   "confidence_level": 95,
+  "variance": 200.0,
   "lower_bound": 116.92,
   "upper_bound": 533.41
 }</code></pre>
@@ -223,11 +225,13 @@
                 
                 <h5>Response Example:</h5>
                 <pre><code>{
-  "null_hypothesis": "μ1 = μ2",
-  "alternative_hypothesis": "μ1 ≠ μ2",
-  "t_statistic": 0.743,
-  "p_value": 0.485,
-  "result": "Fail to reject the null hypothesis at α = 0.05 level."
+  "result": {
+    "null_hypothesis": "μ1 = μ2",
+    "alternative_hypothesis": "μ1 ≠ μ2",
+    "t_statistic": 0.743,
+    "p_value": 0.485,
+    "decision": "Fail to reject the null hypothesis at α = 0.05 level."
+  }
 }</code></pre>
             </div>
         </div>
@@ -272,8 +276,10 @@
   "mean": 30.0,
   "variance": 200.0,
   "standard_deviation": 14.14,
+  "sample_variance": 250.0,
+  "sample_standard_deviation": 15.81,
   "median": 30,
-  "mode": "NaN" 
+  "mode": "NaN"
 }</code></pre>
             </div>
         </div>
@@ -284,3 +290,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
