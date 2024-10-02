@@ -78,7 +78,9 @@
                 </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI</code></pre>
-                
+                <pre><code>{
+  "data": [10, 20, 30, 40, 50]
+}</code></pre>                      
                 <h5>Response Example:</h5>
                 <pre><code>{
   "confidence_level": 90,
@@ -136,7 +138,9 @@
                 </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/PCI</code></pre>
-                
+                <pre><code>{
+  "data": [10, 20, 30, 40, 50]
+}</code></pre>       
                 <h5>Response Example:</h5>
                 <pre><code>{
   "confidence_level": 95,
@@ -188,7 +192,9 @@
                 </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/VarCI</code></pre>
-                
+                <pre><code>{
+  "data": [10, 20, 30, 40, 50]
+}</code></pre>                      
                 <h5>Response Example:</h5>
                 <pre><code>{
   "confidence_level": 95,
@@ -247,7 +253,9 @@
                 </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://my-api-project-83a1e4f4e00f.herokuapp.com/TwoSampleTTest</code></pre>
-                
+                <pre><code>{
+  "data": [10, 20, 30, 40, 50]
+}</code></pre>               
                 <h5>Response Example:</h5>
                 <pre><code>{
   "result": {
@@ -295,7 +303,9 @@
                 </div>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/Descriptive</code></pre>
-                
+                <pre><code>{
+  "data": [10, 20, 30, 40, 50]
+}</code></pre>
                 <h5>Response Example:</h5>
                 <pre><code>{
   "mean": 30.0,
@@ -313,10 +323,13 @@
 
         <!-- Linear Regression -->
         <div class="card mb-4 api-card">
-            <div class="card-header bg-success text-white">
+            <div class="card-header bg-info text-white">
                 1. 線性回歸 (Linear Regression)
             </div>
             <div class="card-body">
+                <p><strong>名詞介紹:</strong></p>
+                <p style="text-align: center; color:gray">profit（單筆營利） = (定價-成本)</p>
+                <p style="text-align: center; color:gray">max_revenue（最高營業額） = profit（單筆營利） * sales（銷售數量）</p>
                 <p><strong>描述</strong>: 線性回歸假設銷售量和單筆營利之間存在線性關係。</p>
                 <p><strong>適用場景</strong>: 當數據關係簡單且接近線性時，使用線性回歸效果較好。</p>
                 <h5>特性:</h5>
@@ -340,8 +353,22 @@
                         </tbody>
                     </table>
                 </div>
+                <hr>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/calculate_max_revenue</code></p>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue</code></pre>
+                <code><pre>
+{
+"monthly_data": {
+    "m1": { "profit": 10, "sales": 100 },
+    "m2": { "profit": 12, "sales": 90 },
+    "m3": { "profit": 15, "sales": 80 },
+    "m4": { "profit": 20, "sales": 10 },
+    "m5": { "profit": 8, "sales": 110 },
+    "m6": { "profit": 7, "sales": 120 }
+    }
+}</pre></code>
                 <h5>Response Example:</h5>
                 <pre><code>{
     "max_profit": 11.46,
@@ -356,6 +383,9 @@
                 2. 多項式回歸 (Polynomial Regression)
             </div>
             <div class="card-body">
+                <p><strong>名詞介紹:</strong></p>
+                <p style="text-align: center; color:gray">profit（單筆營利） = (定價-成本)</p>
+                <p style="text-align: center; color:gray">max_revenue（最高營業額） = profit（單筆營利） * sales（銷售數量）</p>
                 <p><strong>描述</strong>: 多項式回歸擴展了線性回歸的能力，可以捕捉非線性數據關係。</p>
                 <p><strong>適用場景</strong>: 當數據顯示曲線關係時，多項式回歸可以捕捉非線性特徵。</p>
                 <h5>特性:</h5>
@@ -375,8 +405,23 @@
                         </tbody>
                     </table>
                 </div>
+                <hr>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/polynomial_regression</code></p>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression</code></pre>
+                 <code><pre>
+{
+"monthly_data": {
+    "m1": { "profit": 10, "sales": 100 },
+    "m2": { "profit": 12, "sales": 90 },
+    "m3": { "profit": 15, "sales": 80 },
+    "m4": { "profit": 20, "sales": 10 },
+    "m5": { "profit": 8, "sales": 110 },
+    "m6": { "profit": 7, "sales": 120 }
+    }
+}</pre></code>               
+                <h5>Response Example:</h5>
                 <pre><code>{
     "max_profit": 12.68,
     "max_revenue": 1139.11
@@ -386,10 +431,13 @@
 
         <!-- Decision Tree Regression -->
         <div class="card mb-4 api-card">
-            <div class="card-header bg-warning text-white">
+            <div class="card-header bg-info text-white">
                 3. 決策樹回歸 (Decision Tree Regression)
             </div>
             <div class="card-body">
+                <p><strong>名詞介紹:</strong></p>
+                <p style="text-align: center; color:gray">profit（單筆營利） = (定價-成本)</p>
+                <p style="text-align: center; color:gray">max_revenue（最高營業額） = profit（單筆營利） * sales（銷售數量）</p>
                 <p><strong>描述</strong>: 決策樹回歸通過將數據分割成區間，並在每個區間內進行預測。</p>
                 <p><strong>適用場景</strong>: 當數據模式複雜或無法用線性模型擬合時，決策樹回歸提供了靈活的預測方法。</p>
                 <h5>特性:</h5>
@@ -413,8 +461,23 @@
                         </tbody>
                     </table>
                 </div>
+                <hr>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/decision_tree_regression</code></p>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression</code></pre>
+                 <code><pre>
+{
+"monthly_data": {
+    "m1": { "profit": 10, "sales": 100 },
+    "m2": { "profit": 12, "sales": 90 },
+    "m3": { "profit": 15, "sales": 80 },
+    "m4": { "profit": 20, "sales": 10 },
+    "m5": { "profit": 8, "sales": 110 },
+    "m6": { "profit": 7, "sales": 120 }
+    }
+}</pre></code>               
+                <h5>Response Example:</h5>
                 <pre><code>{
     "max_profit": 17.32,
     "max_revenue": 1385.86
@@ -424,10 +487,13 @@
 
         <!-- Random Forest Regression -->
         <div class="card mb-4 api-card">
-            <div class="card-header bg-secondary text-white">
+            <div class="card-header bg-info text-white">
                 4. 隨機森林回歸 (Random Forest Regression)
             </div>
             <div class="card-body">
+                <p><strong>名詞介紹:</strong></p>
+                <p style="text-align: center; color:gray">profit（單筆營利） = (定價-成本)</p>
+                <p style="text-align: center; color:gray">max_revenue（最高營業額） = profit（單筆營利） * sales（銷售數量）</p>
                 <p><strong>描述</strong>: 隨機森林回歸通過多棵決策樹的平均結果來進行預測，減少過擬合問題。</p>
                 <p><strong>適用場景</strong>: 當數據異質性較高或存在異常值時，隨機森林回歸能提供穩定的預測。</p>
                 <h5>特性:</h5>
@@ -451,8 +517,23 @@
                         </tbody>
                     </table>
                 </div>
+                <hr>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/random_forest_regression</code></p>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression</code></pre>
+                 <code><pre>
+{
+"monthly_data": {
+    "m1": { "profit": 10, "sales": 100 },
+    "m2": { "profit": 12, "sales": 90 },
+    "m3": { "profit": 15, "sales": 80 },
+    "m4": { "profit": 20, "sales": 10 },
+    "m5": { "profit": 8, "sales": 110 },
+    "m6": { "profit": 7, "sales": 120 }
+    }
+}</pre></code>               
+                <h5>Response Example:</h5>
                 <pre><code>{
     "max_profit": 25.0,
     "max_revenue": 2352.65
@@ -462,10 +543,13 @@
 
         <!-- SVR -->
         <div class="card mb-4 api-card">
-            <div class="card-header bg-danger text-white">
+            <div class="card-header bg-info text-white">
                 5. 支持向量回歸 (SVR, Support Vector Regression)
             </div>
             <div class="card-body">
+                <p><strong>名詞介紹:</strong></p>
+                <p style="text-align: center; color:gray">profit（單筆營利） = (定價-成本)</p>
+                <p style="text-align: center; color:gray">max_revenue（最高營業額） = profit（單筆營利） * sales（銷售數量）</p>
                 <p><strong>描述</strong>: 支持向量回歸是一種基於核函數的非線性模型，能夠擬合高維數據。</p>
                 <p><strong>適用場景</strong>: 當數據非線性且模式複雜時，SVR 提供了高精度的預測能力。</p>
                 <h5>特性:</h5>
@@ -489,8 +573,22 @@
                         </tbody>
                     </table>
                 </div>
+                <p><strong>HTTP 方法</strong>: POST</p>
+                <p><strong>URL</strong>: <code>/svr_regression</code></p>
                 <h5>Request Example:</h5>
                 <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression</code></pre>
+                <code><pre>
+{
+"monthly_data": {
+    "m1": { "profit": 10, "sales": 100 },
+    "m2": { "profit": 12, "sales": 90 },
+    "m3": { "profit": 15, "sales": 80 },
+    "m4": { "profit": 20, "sales": 10 },
+    "m5": { "profit": 8, "sales": 110 },
+    "m6": { "profit": 7, "sales": 120 }
+    }
+}</pre></code>               
+                <h5>Response Example:</h5>               
                 <pre><code>{
     "max_profit": 25.0,
     "max_revenue": 2352.65
