@@ -183,3 +183,4 @@ wrapt==1.16.0
 wsproto==1.2.0
 zipp==3.19.0
 pywin32==306; platform_system == "Windows"
+scikit-learn

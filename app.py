@@ -243,14 +243,14 @@ curl -X POST -H "Content-Type: application/json" \
      http://localhost:5000/confidence-interval
 
 curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" http://localhost:5000/CI
-curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://random-work-77002ffabcba.herokuapp.com/CI
+curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI
 
 """
 from statistic import *
 
 
 # 用於計算平均數的信賴區間，將數據 [10, 20, 30, 40, 50] 和 CI 90 發送到伺服器
-# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://random-work-77002ffabcba.herokuapp.com/CI
+# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI
 # 計算均值的信賴區間
 @app.route('/CI', methods=['POST'])
 def calculate_confidence_interval():
@@ -275,7 +275,7 @@ def calculate_confidence_interval():
         return jsonify({"error": "An error occurred while calculating the confidence interval"}), 500
 
 # 用於計算二項信賴區間，將成功次數 40、總試驗次數 100 和 CI 95 發送到伺服器
-# curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://random-work-77002ffabcba.herokuapp.com/PCI
+# curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/PCI
 # 計算二項信賴區間 (PCI)
 @app.route('/PCI', methods=['POST'])
 def calculate_proportion_confidence_interval():
@@ -304,7 +304,7 @@ def calculate_proportion_confidence_interval():
         return jsonify({"error": "An error occurred while calculating the proportion confidence interval"}), 500
 
 # 用於計算變異數的信賴區間，將數據 [10, 20, 30, 40, 50] 和 CI 95 發送到伺服器
-# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://random-work-77002ffabcba.herokuapp.com/VarCI
+# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/VarCI
 # 計算變異數的信賴區間
 @app.route('/VarCI', methods=['POST'])
 def calculate_variance_confidence_interval():
@@ -329,7 +329,7 @@ def calculate_variance_confidence_interval():
         return jsonify({"error": "An error occurred while calculating the variance confidence interval"}), 500
 
 # 用於進行雙樣本平均數 t 檢定，將兩組數據 [10, 20, 30, 40, 50] 和 [5, 15, 25, 35, 45] 與顯著水準 alpha 0.05 發送到伺服器
-# curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://random-work-77002ffabcba.herokuapp.com/TwoSampleTTest
+# curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://my-api-project-83a1e4f4e00f.herokuapp.com/TwoSampleTTest
 # 雙樣本平均數的t檢定
 @app.route('/TwoSampleTTest', methods=['POST'])
 def calculate_two_sample_t_test():
@@ -352,7 +352,7 @@ def calculate_two_sample_t_test():
         return jsonify({"error": "An error occurred while performing the two-sample t-test"}), 500
 
 # 用於計算描述性統計量，將數據 [10, 20, 30, 40, 50] 發送到伺服器
-# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://random-work-77002ffabcba.herokuapp.com/Descriptive
+# curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/Descriptive
 # 計算描述性統計
 @app.route('/Descriptive', methods=['POST'])
 def calculate_descriptive_statistics():
@@ -377,5 +377,198 @@ def calculate_descriptive_statistics():
         app.logger.error(f"Error in calculate_descriptive_statistics: {str(e)}")
         return jsonify({"error": "An error occurred while calculating descriptive statistics"}), 500
 
+"""
+- 定價 - 成本 = 單筆營利
+- 銷售數量
+`(單筆營利)*銷售數量=營業額`
+m 表示月份
+m = 1 10*100 = 1000
+m = 2 12*90 = 1080
+m = 3 15*80 = 1200
+m = 4 20*10 = 200
+m = 5 8*110 = 880
+m = 6 7*120 = 840
+
+---
+Input:
+{
+    "monthly_data": {
+        "m1": {"profit": 10, "sales": 100},
+        "m2": {"profit": 12, "sales": 90},
+        "m3": {"profit": 15, "sales": 80},
+        "m4": {"profit": 20, "sales": 10},
+        "m5": {"profit": 8, "sales": 110},
+        "m6": {"profit": 7, "sales": 120}
+    }
+}
+Output: 
+{
+    "max_profit": 11.46,
+    "max_revenue": 1022.35
+}
+"""
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
+
+# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue
+# 發送月度營利數據，並使用線性回歸計算最大營業額
+# curl -X POST -H "Content-Type: application/json" \
+# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
+# https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue
+@app.route('/calculate_max_revenue', methods=['POST'])
+def calculate_max_revenue():
+    data = request.get_json()
+    
+    if not data or 'monthly_data' not in data:
+        return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
+
+    profits, sales = parse_data(data)
+
+    # 使用線性回歸擬合數據
+    model = LinearRegression()
+    model.fit(profits, sales)
+
+    # 生成預測範圍（5到25元之間的單筆營利範圍）
+    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    predicted_sales = model.predict(profit_range)
+    
+    # 計算營業額 Z = X * Y
+    revenue = profit_range.flatten() * predicted_sales
+    
+    # 找到最大營業額的單筆營利
+    max_revenue_index = np.argmax(revenue)
+    max_profit = profit_range[max_revenue_index][0]
+    max_revenue = revenue[max_revenue_index]
+    
+    return jsonify({
+        'max_profit': max_profit,
+        'max_revenue': max_revenue
+    })
+
+def parse_data(data):
+    monthly_data = data['monthly_data']
+    profits = []
+    sales = []
+    for month, values in monthly_data.items():
+        profits.append(values['profit'])
+        sales.append(values['sales'])
+    return np.array(profits).reshape(-1, 1), np.array(sales)
+
+# 多項式回歸 API
+# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression
+# 發送月度營利數據，並使用多項式回歸計算最大營業額
+# curl -X POST -H "Content-Type: application/json" \
+# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
+# https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression
+@app.route('/polynomial_regression', methods=['POST'])
+def polynomial_regression():
+    data = request.get_json()
+    if not data or 'monthly_data' not in data:
+        return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
+
+    profits, sales = parse_data(data)
+
+    poly = PolynomialFeatures(degree=2)
+    X_poly = poly.fit_transform(profits)
+    model = LinearRegression()
+    model.fit(X_poly, sales)
+
+    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    predicted_sales = model.predict(poly.transform(profit_range))
+    revenue = profit_range.flatten() * predicted_sales
+    max_revenue_index = np.argmax(revenue)
+    
+    return jsonify({
+        'max_profit': profit_range[max_revenue_index][0],
+        'max_revenue': revenue[max_revenue_index]
+    })
+
+# 決策樹回歸 API
+# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression
+# 發送月度營利數據，並使用決策樹回歸計算最大營業額
+# curl -X POST -H "Content-Type: application/json" \
+# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
+# https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression
+@app.route('/decision_tree_regression', methods=['POST'])
+def decision_tree_regression():
+    data = request.get_json()
+    if not data or 'monthly_data' not in data:
+        return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
+
+    profits, sales = parse_data(data)
+
+    tree_model = DecisionTreeRegressor()
+    tree_model.fit(profits, sales)
+
+    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    predicted_sales = tree_model.predict(profit_range)
+    revenue = profit_range.flatten() * predicted_sales
+    max_revenue_index = np.argmax(revenue)
+    
+    return jsonify({
+        'max_profit': profit_range[max_revenue_index][0],
+        'max_revenue': revenue[max_revenue_index]
+    })
+
+# 隨機森林回歸 API
+# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression
+# 發送月度營利數據，並使用隨機森林回歸計算最大營業額
+# curl -X POST -H "Content-Type: application/json" \
+# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
+#https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression
+@app.route('/random_forest_regression', methods=['POST'])
+def random_forest_regression():
+    data = request.get_json()
+    if not data or 'monthly_data' not in data:
+        return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
+
+    profits, sales = parse_data(data)
+
+    forest_model = RandomForestRegressor(n_estimators=100)
+    forest_model.fit(profits, sales)
+
+    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    predicted_sales = forest_model.predict(profit_range)
+    revenue = profit_range.flatten() * predicted_sales
+    max_revenue_index = np.argmax(revenue)
+    
+    return jsonify({
+        'max_profit': profit_range[max_revenue_index][0],
+        'max_revenue': revenue[max_revenue_index]
+    })
+
+
+# 支持向量回歸 (SVR) API
+# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression
+# 發送月度營利數據，並使用支持向量回歸計算最大營業額
+# curl -X POST -H "Content-Type: application/json" \
+# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
+# https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression
+@app.route('/svr_regression', methods=['POST'])
+def svr_regression():
+    data = request.get_json()
+    if not data or 'monthly_data' not in data:
+        return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
+
+    profits, sales = parse_data(data)
+
+    svr_model = SVR(kernel='rbf')
+    svr_model.fit(profits, sales)
+
+    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    predicted_sales = svr_model.predict(profit_range)
+    revenue = profit_range.flatten() * predicted_sales
+    max_revenue_index = np.argmax(revenue)
+    
+    return jsonify({
+        'max_profit': profit_range[max_revenue_index][0],
+        'max_revenue': revenue[max_revenue_index]
+    })
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+

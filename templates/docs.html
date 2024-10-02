@@ -6,13 +6,39 @@
     <title>API Documentation</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #search-box {
+            border: 2px solid #ff9900; /* 改變邊框顏色 */
+            border-radius: 25px; /* 圓角效果 */
+            padding: 12px 20px; /* 增加內邊距 */
+            font-size: 16px; /* 調整字體大小 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+            transition: all 0.3s ease; /* 添加過渡效果 */
+        }
+
+        #search-box:focus {
+            outline: none; /* 去除聚焦時的藍色外框 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 聚焦時增加陰影效果 */
+            border-color: #0056b3; /* 改變邊框顏色當聚焦時 */
+        }
+
+        #search-box::placeholder {
+            color: #999; /* 改變 placeholder 顏色 */
+            font-style: italic; /* 改變 placeholder 文字風格 */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-5">API Documentation</h1>
 
+        <!-- Search Box -->
+        <div class="form-group">
+            <input type="text" id="search-box" class="form-control" placeholder="API 搜尋">
+        </div>
+
         <!-- Confidence Interval -->
-        <div class="card mb-4">
+        <div class="card mb-4 api-card">
             <div class="card-header bg-primary text-white">
                 1. 計算平均數信賴區間 (Confidence Interval) - <code>/CI</code>
             </div>
@@ -61,10 +87,9 @@
   "upper_bound": 42.4
 }</code></pre>
             </div>
-        </div>
 
         <!-- Proportion Confidence Interval -->
-        <div class="card mb-4">
+        <div class="card mb-4 api-card">
             <div class="card-header bg-primary text-white">
                 2. 計算二項信賴區間 (Proportion Confidence Interval) - <code>/PCI</code>
             </div>
@@ -123,7 +148,7 @@
         </div>
 
         <!-- Variance Confidence Interval -->
-        <div class="card mb-4">
+        <div class="card mb-4 api-card">
             <div class="card-header bg-primary text-white">
                 3. 計算變異數信賴區間 (Variance Confidence Interval) - <code>/VarCI</code>
             </div>
@@ -175,7 +200,7 @@
         </div>
 
         <!-- Two-Sample T-Test -->
-        <div class="card mb-4">
+        <div class="card mb-4 api-card">
             <div class="card-header bg-primary text-white">
                 4. 雙樣本平均數 t 檢定 (Two-Sample T-Test) - <code>/TwoSampleTTest</code>
             </div>
@@ -237,7 +262,7 @@
         </div>
 
         <!-- Descriptive Statistics -->
-        <div class="card mb-4">
+        <div class="card mb-4 api-card">
             <div class="card-header bg-primary text-white">
                 5. 描述性統計 (Descriptive Statistics) - <code>/Descriptive</code>
             </div>
@@ -284,10 +309,215 @@
             </div>
         </div>
     </div>
+
+
+        <!-- Linear Regression -->
+        <div class="card mb-4 api-card">
+            <div class="card-header bg-success text-white">
+                1. 線性回歸 (Linear Regression)
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 線性回歸假設銷售量和單筆營利之間存在線性關係。</p>
+                <p><strong>適用場景</strong>: 當數據關係簡單且接近線性時，使用線性回歸效果較好。</p>
+                <h5>特性:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>優點</th>
+                                <th>缺點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>模型簡單，易於解釋，適合處理線性數據。</td>
+                                <td>無法捕捉數據中的非線性關係。</td>
+                            </tr>
+                            <tr>
+                                <td>計算效率高。</td>
+                                <td>對複雜模式不適應。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/linear_regression</code></pre>
+                <h5>Response Example:</h5>
+                <pre><code>{
+    "max_profit": 11.46,
+    "max_revenue": 1022.34
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Polynomial Regression -->
+        <div class="card mb-4 api-card">
+            <div class="card-header bg-info text-white">
+                2. 多項式回歸 (Polynomial Regression)
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 多項式回歸擴展了線性回歸的能力，可以捕捉非線性數據關係。</p>
+                <p><strong>適用場景</strong>: 當數據顯示曲線關係時，多項式回歸可以捕捉非線性特徵。</p>
+                <h5>特性:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>優點</th>
+                                <th>缺點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>適合捕捉非線性模式，能處理更複雜的曲線數據。</td>
+                                <td>容易過擬合，模型變得複雜時泛化能力下降。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression</code></pre>
+                <pre><code>{
+    "max_profit": 12.68,
+    "max_revenue": 1139.11
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Decision Tree Regression -->
+        <div class="card mb-4 api-card">
+            <div class="card-header bg-warning text-white">
+                3. 決策樹回歸 (Decision Tree Regression)
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 決策樹回歸通過將數據分割成區間，並在每個區間內進行預測。</p>
+                <p><strong>適用場景</strong>: 當數據模式複雜或無法用線性模型擬合時，決策樹回歸提供了靈活的預測方法。</p>
+                <h5>特性:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>優點</th>
+                                <th>缺點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>能夠捕捉複雜的數據模式，無需假設數據分佈。</td>
+                                <td>容易過擬合，尤其是當數據較少時。</td>
+                            </tr>
+                            <tr>
+                                <td>容易解釋，可以視覺化。</td>
+                                <td>對數據的小變化較為敏感，預測結果不夠平滑。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression</code></pre>
+                <pre><code>{
+    "max_profit": 17.32,
+    "max_revenue": 1385.86
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Random Forest Regression -->
+        <div class="card mb-4 api-card">
+            <div class="card-header bg-secondary text-white">
+                4. 隨機森林回歸 (Random Forest Regression)
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 隨機森林回歸通過多棵決策樹的平均結果來進行預測，減少過擬合問題。</p>
+                <p><strong>適用場景</strong>: 當數據異質性較高或存在異常值時，隨機森林回歸能提供穩定的預測。</p>
+                <h5>特性:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>優點</th>
+                                <th>缺點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>比單棵決策樹更穩定，泛化能力更強。</td>
+                                <td>模型較為複雜，難以解釋。</td>
+                            </tr>
+                            <tr>
+                                <td>適合異質性數據和大數據集。</td>
+                                <td>計算成本較高，訓練時間較長。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression</code></pre>
+                <pre><code>{
+    "max_profit": 25.0,
+    "max_revenue": 2352.65
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- SVR -->
+        <div class="card mb-4 api-card">
+            <div class="card-header bg-danger text-white">
+                5. 支持向量回歸 (SVR, Support Vector Regression)
+            </div>
+            <div class="card-body">
+                <p><strong>描述</strong>: 支持向量回歸是一種基於核函數的非線性模型，能夠擬合高維數據。</p>
+                <p><strong>適用場景</strong>: 當數據非線性且模式複雜時，SVR 提供了高精度的預測能力。</p>
+                <h5>特性:</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>優點</th>
+                                <th>缺點</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>能夠處理高維和非線性數據。</td>
+                                <td>模型難以解釋，訓練時間較長。</td>
+                            </tr>
+                            <tr>
+                                <td>擬合精度高，適合複雜數據。</td>
+                                <td>需要調整多個參數，調參難度較大。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h5>Request Example:</h5>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression</code></pre>
+                <pre><code>{
+    "max_profit": 25.0,
+    "max_revenue": 2352.65
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- JavaScript to handle the search functionality -->
+    <script>
+        document.getElementById('search-box').addEventListener('input', function() {
+            var searchValue = this.value.toLowerCase();
+            var cards = document.querySelectorAll('.api-card');
+            
+            cards.forEach(function(card) {
+                var cardText = card.textContent.toLowerCase();
+                if (cardText.includes(searchValue)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
