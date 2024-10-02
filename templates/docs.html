@@ -341,7 +341,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/linear_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue</code></pre>
                 <h5>Response Example:</h5>
                 <pre><code>{
     "max_profit": 11.46,
@@ -376,7 +376,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression</code></pre>
                 <pre><code>{
     "max_profit": 12.68,
     "max_revenue": 1139.11
@@ -414,7 +414,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression</code></pre>
                 <pre><code>{
     "max_profit": 17.32,
     "max_revenue": 1385.86
@@ -452,7 +452,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression</code></pre>
                 <pre><code>{
     "max_profit": 25.0,
     "max_revenue": 2352.65
@@ -490,7 +490,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression</code></pre>
                 <pre><code>{
     "max_profit": 25.0,
     "max_revenue": 2352.65
