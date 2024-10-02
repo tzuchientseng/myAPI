@@ -408,17 +408,31 @@ Output:
 }
 """
 import numpy as np
+from flask import Flask, request, jsonify
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 
-# curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue
-# 發送月度營利數據，並使用線性回歸計算最大營業額
-# curl -X POST -H "Content-Type: application/json" \
-# -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" \
-# https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue
+def parse_data(data):
+    monthly_data = data['monthly_data']
+    profits = []
+    sales = []
+    for month, values in monthly_data.items():
+        profits.append(values['profit'])
+        sales.append(values['sales'])
+    return np.array(profits).reshape(-1, 1), np.array(sales)
+
+def calculate_confidence_interval(data, confidence=0.95):
+    mean = np.mean(data)
+    std = np.std(data)
+    z = 1.96  # 對應 95% 信賴區間
+    lower_bound = mean - z * std
+    upper_bound = mean + z * std
+    return lower_bound, upper_bound
+
+# 線性回歸 API
 @app.route('/calculate_max_revenue', methods=['POST'])
 def calculate_max_revenue():
     data = request.get_json()
@@ -426,14 +440,34 @@ def calculate_max_revenue():
     if not data or 'monthly_data' not in data:
         return jsonify({'error': 'Invalid input, please provide monthly_data dictionary'}), 400
 
+    # 解析數據
     profits, sales = parse_data(data)
 
-    # 使用線性回歸擬合數據
-    model = LinearRegression()
-    model.fit(profits, sales)
+    # 計算 profits 的信賴區間
+    lower_bound, upper_bound = calculate_confidence_interval(profits)
 
-    # 生成預測範圍（5到25元之間的單筆營利範圍）
-    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    # 過濾掉 profits 和 sales 中不在信賴區間範圍內的數據
+    filtered_profits = []
+    filtered_sales = []
+    for profit, sale in zip(profits, sales):
+        if lower_bound <= profit <= upper_bound:
+            filtered_profits.append(profit)
+            filtered_sales.append(sale)
+
+    # 確保數據經過過濾後還有足夠的樣本點
+    if len(filtered_profits) < 2:
+        return jsonify({'error': 'Not enough data points after filtering'}), 400
+
+    # 將過濾後的數據轉換為 numpy array 並進行擬合
+    filtered_profits = np.array(filtered_profits).reshape(-1, 1)
+    filtered_sales = np.array(filtered_sales)
+
+    # 使用線性回歸擬合篩選後的數據
+    model = LinearRegression()
+    model.fit(filtered_profits, filtered_sales)
+
+    # 生成基於信賴區間的預測範圍
+    profit_range = np.linspace(lower_bound, upper_bound, 100).reshape(-1, 1)
     predicted_sales = model.predict(profit_range)
     
     # 計算營業額 Z = X * Y
@@ -444,19 +478,18 @@ def calculate_max_revenue():
     max_profit = profit_range[max_revenue_index][0]
     max_revenue = revenue[max_revenue_index]
     
+    # 根據 profit 的最大和最小值判斷是否建議調整定價
+    suggestion = None
+    if max_profit < profits.min():
+        suggestion = "定價太低，建議提升定價。"
+    elif max_profit > profits.max():
+        suggestion = "定價太高，建議降低定價。"
+
     return jsonify({
         'max_profit': max_profit,
-        'max_revenue': max_revenue
+        'max_revenue': max_revenue,
+        'suggestion': suggestion
     })
-
-def parse_data(data):
-    monthly_data = data['monthly_data']
-    profits = []
-    sales = []
-    for month, values in monthly_data.items():
-        profits.append(values['profit'])
-        sales.append(values['sales'])
-    return np.array(profits).reshape(-1, 1), np.array(sales)
 
 # 多項式回歸 API
 # curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression
@@ -477,7 +510,7 @@ def polynomial_regression():
     model = LinearRegression()
     model.fit(X_poly, sales)
 
-    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    profit_range = np.linspace(profits.min(), profits.max(), 100).reshape(-1, 1)
     predicted_sales = model.predict(poly.transform(profit_range))
     revenue = profit_range.flatten() * predicted_sales
     max_revenue_index = np.argmax(revenue)
@@ -504,7 +537,7 @@ def decision_tree_regression():
     tree_model = DecisionTreeRegressor()
     tree_model.fit(profits, sales)
 
-    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    profit_range = np.linspace(profits.min(), profits.max(), 100).reshape(-1, 1)
     predicted_sales = tree_model.predict(profit_range)
     revenue = profit_range.flatten() * predicted_sales
     max_revenue_index = np.argmax(revenue)
@@ -531,7 +564,7 @@ def random_forest_regression():
     forest_model = RandomForestRegressor(n_estimators=100)
     forest_model.fit(profits, sales)
 
-    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    profit_range = np.linspace(profits.min(), profits.max(), 100).reshape(-1, 1)
     predicted_sales = forest_model.predict(profit_range)
     revenue = profit_range.flatten() * predicted_sales
     max_revenue_index = np.argmax(revenue)
@@ -559,7 +592,7 @@ def svr_regression():
     svr_model = SVR(kernel='rbf')
     svr_model.fit(profits, sales)
 
-    profit_range = np.linspace(5, 25, 100).reshape(-1, 1)
+    profit_range = np.linspace(profits.min(), profits.max(), 100).reshape(-1, 1)
     predicted_sales = svr_model.predict(profit_range)
     revenue = profit_range.flatten() * predicted_sales
     max_revenue_index = np.argmax(revenue)
