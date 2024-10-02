@@ -481,11 +481,11 @@ def calculate_max_revenue():
     # 根據 profit 的最大和最小值判斷是否建議調整定價
     suggestion = None
     if max_profit < profits.min():
-        suggestion = "定價太低，建議提升定價。"
+        suggestion = "The price is too low, it's recommended to increase the price."
     elif max_profit > profits.max():
-        suggestion = "定價太低，建議提升定價至最佳營利點。"
+        suggestion = "The price is too low, it's recommended to increase the price to the optimal profit point."
     else:
-        suggestion = "目前定價已經接近最佳營利點。"
+        suggestion = "The current pricing is close to the optimal profit point."
 
     return jsonify({
         'max_profit': max_profit,
