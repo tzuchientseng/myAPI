@@ -77,7 +77,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://my-api-project-83a1e4f4e00f.herokuapp.com/CI</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 90}" https://api.sunnytseng.com/CI</code></pre>
                 <pre><code>{
   "data": [10, 20, 30, 40, 50]
 }</code></pre>                      
@@ -137,7 +137,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/PCI</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"successes\": 40, \"trials\": 100, \"CI\": 95}" https://api.sunnytseng.com/PCI</code></pre>
                 <pre><code>{
   "data": [10, 20, 30, 40, 50]
 }</code></pre>       
@@ -191,7 +191,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://my-api-project-83a1e4f4e00f.herokuapp.com/VarCI</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50], \"CI\": 95}" https://api.sunnytseng.com/VarCI</code></pre>
                 <pre><code>{
   "data": [10, 20, 30, 40, 50]
 }</code></pre>                      
@@ -252,7 +252,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://my-api-project-83a1e4f4e00f.herokuapp.com/TwoSampleTTest</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data1\": [10, 20, 30, 40, 50], \"data2\": [5, 15, 25, 35, 45], \"alpha\": 0.05}" https://api.sunnytseng.com/TwoSampleTTest</code></pre>
                 <pre><code>{
   "data": [10, 20, 30, 40, 50]
 }</code></pre>               
@@ -302,7 +302,7 @@
                     </table>
                 </div>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://my-api-project-83a1e4f4e00f.herokuapp.com/Descriptive</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"data\": [10, 20, 30, 40, 50]}" https://api.sunnytseng.com/Descriptive</code></pre>
                 <pre><code>{
   "data": [10, 20, 30, 40, 50]
 }</code></pre>
@@ -357,7 +357,7 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/calculate_max_revenue</code></p>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/calculate_max_revenue</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://api.sunnytseng.com/calculate_max_revenue</code></pre>
                 <code><pre>
 {
 "monthly_data": {
@@ -410,7 +410,7 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/polynomial_regression</code></p>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/polynomial_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://api.sunnytseng.com/polynomial_regression</code></pre>
                  <code><pre>
 {
 "monthly_data": {
@@ -466,7 +466,7 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/decision_tree_regression</code></p>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/decision_tree_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://api.sunnytseng.com/decision_tree_regression</code></pre>
                  <code><pre>
 {
 "monthly_data": {
@@ -522,7 +522,7 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/random_forest_regression</code></p>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/random_forest_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://api.sunnytseng.com/random_forest_regression</code></pre>
                  <code><pre>
 {
 "monthly_data": {
@@ -577,7 +577,7 @@
                 <p><strong>HTTP 方法</strong>: POST</p>
                 <p><strong>URL</strong>: <code>/svr_regression</code></p>
                 <h5>Request Example:</h5>
-                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://my-api-project-83a1e4f4e00f.herokuapp.com/svr_regression</code></pre>
+                <pre><code>curl -X POST -H "Content-Type: application/json" -d "{\"monthly_data\": {\"m1\": {\"profit\": 10, \"sales\": 100}, \"m2\": {\"profit\": 12, \"sales\": 90}, \"m3\": {\"profit\": 15, \"sales\": 80}, \"m4\": {\"profit\": 20, \"sales\": 10}, \"m5\": {\"profit\": 8, \"sales\": 110}, \"m6\": {\"profit\": 7, \"sales\": 120}}}" https://api.sunnytseng.com/svr_regression</code></pre>
                 <code><pre>
 {
 "monthly_data": {
