@@ -1,1 +1,105 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>myAPI</title><style>body,html{height:100%;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:rgba(194,175,108)}.center-image{max-width:50%;height:auto;object-fit:contain}@media (max-width:600px){.center-image{max-width:70%}}@media (max-width:400px){.center-image{max-width:80%}}.button{display:block;margin-top:20px;padding:10px;font-size:16px;background-color:#007bff;color:#fff;border:none;border-radius:5px;cursor:pointer;text-decoration:none;transition:background-color .3s ease}#docs{position:relative;display:inline-block;text-align:center;font-size:16px;text-decoration:none;background-color:#007bff;color:#fff;border-radius:5px;cursor:pointer}#docs:hover{background-color:#0056b3}#docs::after{content:'★';position:absolute;top:-10px;left:75%;transform:translateX(-50%) scale(.5) rotate(0);font-size:30px;color:gold;opacity:0;pointer-events:none}#docs:hover::after{animation:star-animation .5s ease-in-out forwards}@keyframes star-animation{0%{opacity:0;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}100%{opacity:0;transform:scale(.5) rotate(40deg)}}</style></head><body><img src="../static/images/200.png" alt="API Image" class="center-image"><a href="https://api.sunnytseng.com/docs" class="button" id="docs">API Docs</a></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>myAPI</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(194, 175, 108)
+      }
+
+      .center-image {
+        max-width: 50%;
+        height: auto;
+        object-fit: contain
+      }
+
+      @media (max-width:600px) {
+        .center-image {
+          max-width: 70%
+        }
+      }
+
+      @media (max-width:400px) {
+        .center-image {
+          max-width: 80%
+        }
+      }
+
+      .button {
+        display: block;
+        margin-top: 20px;
+        padding: 12px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color .3s ease
+      }
+
+      #docs {
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        font-size: 17px;
+        text-decoration: none;
+        background-color: #ffa600;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer
+      }
+
+      #docs:hover {
+        background-color: #e68507
+      }
+
+      #docs::after {
+        content: '★';
+        position: absolute;
+        top: -10px;
+        left: 75%;
+        transform: translateX(-50%) scale(.5) rotate(0);
+        font-size: 30px;
+        color: gold;
+        opacity: 0;
+        pointer-events: none
+      }
+
+      #docs:hover::after {
+        animation: star-animation .5s ease-in-out forwards
+      }
+
+      @keyframes star-animation {
+        0% {
+          opacity: 0;
+          transform: scale(.5) rotate(0)
+        }
+
+        50% {
+          opacity: 1;
+          transform: scale(1.2) rotate(20deg)
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(.5) rotate(40deg)
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <img src="../static/images/200.png" alt="API Image" class="center-image">
+    <a href="https://blog.sunnytseng.com/essay/myAPI.html" class="button" id="docs">Guide</a>
+  </body>
+</html>

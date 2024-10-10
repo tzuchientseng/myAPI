@@ -359,10 +359,19 @@ def calculate_descriptive_statistics():
     try:
         data = request.json.get("data")
         
-        if not data:
-            return jsonify({"error": "Missing data"}), 400
+        if not data or not isinstance(data, list):
+            return jsonify({"error": "Invalid or missing data"}), 400
         
         des_data = DesData(data)
+        
+        # 處理 mode，確保當多眾數或無眾數時正確返回
+        try:
+            mode_value = des_data.mode()
+            if mode_value is None:  # 如果無眾數或有多個眾數
+                mode_value = "No mode"  # 沒有明顯的眾數
+        except Exception as e:
+            print(f"Error during mode calculation: {e}")
+            mode_value = f"Error calculating mode: {str(e)}"
         
         return jsonify({
             "mean": des_data.mean(),
@@ -371,7 +380,7 @@ def calculate_descriptive_statistics():
             "sample_variance": des_data.samp_vari(),
             "sample_standard_deviation": des_data.samp_dev(),
             "median": des_data.median(),
-            "mode": des_data.mode(),
+            "mode": mode_value,  # 返回 mode 的結果
         }), 200
     except Exception as e:
         app.logger.error(f"Error in calculate_descriptive_statistics: {str(e)}")
