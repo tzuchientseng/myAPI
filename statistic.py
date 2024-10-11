@@ -265,11 +265,30 @@ class DesData:
         return np.median(self.data)
 
     def mode(self):
-        values, counts = np.unique(self.data, return_counts=True)
-        max_count_index = np.argmax(counts)
-        if np.sum(counts == counts[max_count_index]) > 1:
-            return float('nan')  # Multiple modes
-        return values[max_count_index]
+        try:
+            # 使用 np.unique 找到數據中的唯一值及其對應的出現次數
+            values, counts = np.unique(self.data, return_counts=True)
+            max_count = np.max(counts)
+            
+            # 調試輸出：檢查唯一值和其出現次數
+            print(f"Values: {values}, Counts: {counts}, Max Count: {max_count}")
+            
+            # 找出所有出現次數等於最大頻率的值
+            modes = values[counts == max_count]
+            
+            # 調試輸出：檢查找到的模式
+            print(f"Modes: {modes}")
+            
+            # 轉換 numpy 的數據類型：在 mode 函數中，將 modes[0] 轉換為 Python 的 int 類型，這樣可以避免 numpy.int32 無法序列化的問題。
+            if len(modes) == 1:
+                print(f"Single mode found: {modes[0]}")
+                return int(modes[0])  # 只有一個眾數，返回該眾數，並轉換為 Python 的 int 類型
+            else:
+                print("Multiple modes or no mode")
+                return None  # 有多個眾數或無眾數，返回 None
+        except Exception as e:
+            print(f"Error calculating mode: {e}")
+            return None
 
     def bound(self, confidence_level, sigma=None, mean=None, sample=None):
         avg = self.mean() if mean is None else mean

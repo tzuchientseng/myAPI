@@ -359,10 +359,19 @@ def calculate_descriptive_statistics():
     try:
         data = request.json.get("data")
         
-        if not data:
-            return jsonify({"error": "Missing data"}), 400
+        if not data or not isinstance(data, list):
+            return jsonify({"error": "Invalid or missing data"}), 400
         
         des_data = DesData(data)
+        
+        # 處理 mode，確保當多眾數或無眾數時正確返回
+        try:
+            mode_value = des_data.mode()
+            if mode_value is None:  # 如果無眾數或有多個眾數
+                mode_value = "No mode"  # 沒有明顯的眾數
+        except Exception as e:
+            print(f"Error during mode calculation: {e}")
+            mode_value = f"Error calculating mode: {str(e)}"
         
         return jsonify({
             "mean": des_data.mean(),
@@ -371,7 +380,7 @@ def calculate_descriptive_statistics():
             "sample_variance": des_data.samp_vari(),
             "sample_standard_deviation": des_data.samp_dev(),
             "median": des_data.median(),
-            "mode": des_data.mode(),
+            "mode": mode_value,  # 返回 mode 的結果
         }), 200
     except Exception as e:
         app.logger.error(f"Error in calculate_descriptive_statistics: {str(e)}")
@@ -478,14 +487,16 @@ def calculate_max_revenue():
     max_profit = profit_range[max_revenue_index][0]
     max_revenue = revenue[max_revenue_index]
     
-    # 根據 profit 的最大和最小值判斷是否建議調整定價
+    # 取出最後一個月的 profit
+    last_month_profit = profits[-1][0]
+
     suggestion = None
-    if max_profit < profits.min():
-        suggestion = "The price is too low, it's recommended to increase the price."
-    elif max_profit > profits.max():
-        suggestion = "The price is too low, it's recommended to increase the price to the optimal profit point."
+    if max_profit < last_month_profit:
+        suggestion = "The price seems too high compared to last month, it's recommended to decrease the price."
+    elif max_profit > last_month_profit:
+        suggestion = "The price seems too low compared to last month, it's recommended to increase the price."
     else:
-        suggestion = "The current pricing is close to the optimal profit point."
+        suggestion = "The current pricing is close to last month's profit point, no need for changes."
 
     return jsonify({
         'max_profit': max_profit,
