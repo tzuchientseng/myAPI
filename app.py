@@ -435,7 +435,8 @@ def parse_data(data):
 
 def calculate_confidence_interval(data, confidence=0.95):
     mean = np.mean(data)
-    std = np.std(data)
+    # std = np.std(data)
+    std = np.std(data, ddof=1)
     z = 1.96  # 對應 95% 信賴區間
     lower_bound = mean - z * std
     upper_bound = mean + z * std
